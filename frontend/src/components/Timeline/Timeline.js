@@ -2,7 +2,7 @@ import React from "react";
 import Post from "./Post/Post";
 import Suggestions from "../Suggestions/Suggestions";
 import "./Timeline.css";
-// import StoryList from "../StoryList/StoryList";
+import StoryList from "../StoryList/StoryList";
 
 
 function Timeline() {
@@ -68,9 +68,9 @@ function Timeline() {
   return (
     <div className="timeline">
       <div className="timeline__left">
-        {/* <div className="timeline__header">
+         <div className="timeline__header">
           <StoryList />
-        </div> */}
+        </div> 
         <div className="timeline__posts">
           {posts.map((post) => (
             <Post

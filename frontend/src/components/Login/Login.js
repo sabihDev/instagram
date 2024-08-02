@@ -4,8 +4,10 @@ import { AuthContext } from '../../context/AuthContext';
 import { login as loginUserApi } from '../../services/api';
 import './Login.css';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -25,9 +27,14 @@ const Login = () => {
         try {
             const res = await loginUserApi(formData);
             localStorage.setItem('token', res.data.token);
-            login();
+            login(formData);
+            navigate('/')
         } catch (error) {
-            setError(error.response.data.error);
+            if (error.response && error.response.data && error.response.data.error) {
+                setError(error.response.data.error);
+            } else {
+                setError('An unexpected error occurred. Please try again later.');
+            }
         }
     };
 

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../../services/api';
 import './Register.css';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -69,6 +70,7 @@ const Register = () => {
                     />
                 </div>
                 <button type="submit">Register</button>
+                <Link className="register-link" to="/login">Have an account?<span>Login</span></Link>
                 {error && <div className="error-message">{error}</div>}
             </form>
         </div>

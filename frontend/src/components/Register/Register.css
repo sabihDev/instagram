@@ -1,6 +1,4 @@
-/* frontend/src/components/Register.css */
-
-.register-container {
+    .register-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,4 +66,13 @@
     color: #d9534f;
     margin-top: 1rem;
     text-align: center;
+}
+
+.register-form .register-link{
+    text-decoration: none;
+    color: #555;
+}
+
+.register-form .register-link span{
+    color: #007bff;
 }

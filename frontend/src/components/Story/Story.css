@@ -1,0 +1,35 @@
+.story{
+    background: radial-gradient(circle at 30% 107%, 
+    #fd5949 45%, 
+    #d6249f 60%, 
+    #285AEB 90%);
+
+
+    width: 80px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* overflow: hidden; */
+}
+
+.story img{
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    /* border: 1px solid white; */
+    transform: translate(5px, 5px);
+}
+
+.story span{
+    color: white;
+    font-size: 12px;
+    position: absolute;
+    bottom: -15px;
+}
