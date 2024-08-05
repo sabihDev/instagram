@@ -20,7 +20,7 @@ function Post({ user, postImage, likes, timestamp }) {
         <MoreHorizIcon />
       </div>
       <div className="post__image">
-        <img src={postImage} alt="Post Image" />
+        <img src={postImage} alt="Post" />
       </div>
       <div className="post__footer">
         <div className="post__footerIcons">

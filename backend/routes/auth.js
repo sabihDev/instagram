@@ -10,8 +10,8 @@ const JWT_SECRET = process.env.JWT_SECRET;
 router.post('/register', async (req, res) => {
     const { username, email, password } = req.body;
     try {
-        const user = await User.findOne({ email });
-        if (user) {
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
             return res.status(400).json({ msg: 'User already exists' });
         }
 
@@ -38,7 +38,13 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ msg: 'Invalid credentials' });
         }
 
-        const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
+        const payload = {
+            id: user.id,
+            username: user.username,
+            email: user.email
+        };
+
+        const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
         res.json({ token });
     } catch (error) {
         res.status(500).json({ error: error.message });
