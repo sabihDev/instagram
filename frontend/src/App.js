@@ -6,6 +6,7 @@ import Login from './components/Login/Login.js';
 import Register from './components/Register/Register';
 import PrivateRoute from './components/PrivateRoute.js';
 import { AuthProvider } from './context/AuthContext';
+import ProfilePage from './components/Profile/Profile.js';
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                                 </PrivateRoute>
                             }
                         />
+                        <Route path="/profile/:username" element={<ProfilePage />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                     </Routes>

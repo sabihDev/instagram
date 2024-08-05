@@ -71,7 +71,7 @@ const Sidebar = () => {
           <AddCircleOutlineIcon />
           <span>Create</span>
         </button>
-        <Link to={`/profile/@${username}`} className="sidenav__button col">
+        <Link to={`/profile/${username}/`} className="sidenav__button col">
           <Avatar className="sidenav__buttonAvatar">
             {username ? username.charAt(0).toUpperCase() : "A"}
           </Avatar>
