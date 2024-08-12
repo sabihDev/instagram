@@ -8,6 +8,8 @@ import connectDB from "./utils/db.js";
 dotenv.config({});
 
 import userRoutes from "./routes/userRoutes.js";
+import postRoutes from "./routes/postRoutes.js";
+import messageRoutes from "./routes/messageRoutes.js";
 
 const PORT = process.env.PORT || 6000;
 
@@ -28,6 +30,8 @@ app.use(cors(corsOptions));
 
 // routes
 app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/post", postRoutes);
+app.use("/api/v1/message", messageRoutes);
 
 
 app.listen(PORT, () => {

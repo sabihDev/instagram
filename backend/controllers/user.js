@@ -57,6 +57,15 @@ export const login = async (req, res) => {
         }
 
         // Prepare the user data for the response
+        const populatedPosts = await Promise.all(user.posts.map(async (postId) => {
+            const post = await Post.findById({postId});
+            if(post.author.equals(user._id)) return post;
+            return null;
+        }))
+
+        // Generate JWT token
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+
         const userData = {
             _id: user._id,
             username: user.username,
@@ -67,10 +76,6 @@ export const login = async (req, res) => {
             following: user.following,
             posts: user.posts
         };
-
-        // Generate JWT token
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
-
         // Set the token as an HTTP-only cookie and return the response
         return res
             .cookie('token', token, { httpOnly: true, sameSite: 'strict', maxAge: 24 * 60 * 60 * 1000 })
