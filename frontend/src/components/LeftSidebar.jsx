@@ -4,27 +4,13 @@ import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import axios from 'axios'; // Import axios if not already done
+import { useSelector } from 'react-redux'
 
-const sidebarItems = [
-    { icon: <Home />, text: 'Home', path: '/' },
-    { icon: <Search />, text: 'Search', path: '/search' },
-    { icon: <TrendingUp />, text: 'Explore', path: '/explore' },
-    { icon: <MessageCircle />, text: 'Messages', path: '/messages' },
-    { icon: <Heart />, text: 'Notifications', path: '/notifications' },
-    { icon: <PlusSquare />, text: 'Create', path: '/create' },
-    {
-        icon: (
-            <Avatar className="w-6 h-6">
-                <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-        ), text: 'Profile', path: '/profile'
-    },
-    { icon: <LogOut />, text: 'Logout' },
-]
+
 
 const LeftSidebar = () => {
     const navigate = useNavigate();
+    const {user} = useSelector(store => store.auth);
 
     const LogoutHandler = async () => {
         try {
@@ -47,6 +33,24 @@ const LeftSidebar = () => {
             navigate(item.path);
         }
     }
+
+    const sidebarItems = [
+    { icon: <Home />, text: 'Home', path: '/' },
+    { icon: <Search />, text: 'Search', path: '/search' },
+    { icon: <TrendingUp />, text: 'Explore', path: '/explore' },
+    { icon: <MessageCircle />, text: 'Messages', path: '/messages' },
+    { icon: <Heart />, text: 'Notifications', path: '/notifications' },
+    { icon: <PlusSquare />, text: 'Create', path: '/create' },
+    {
+        icon: (
+            <Avatar className="w-6 h-6">
+                <AvatarImage src={user?.profilePicture} alt="@shadcn" />
+                <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+        ), text: 'Profile', path: '/profile'
+    },
+    { icon: <LogOut />, text: 'Logout' },
+]
 
     return (
         <div className='fixed top-0 left-0 z-10 px-4 border-r border-gray-200 w-[16%] h-screen'>
