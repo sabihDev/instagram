@@ -1,6 +1,7 @@
 import sharp from "sharp";
 import User from "../models/User.js";
 import Post from "../models/Post.js";
+import cloudinary from '../utils/cloudinary.js';
 import Comment from "../models/Comment.js";
 
 export const addNewPost = async (req, res) => {

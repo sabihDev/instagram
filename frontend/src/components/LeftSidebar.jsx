@@ -1,21 +1,27 @@
 import { Heart, Home, LogOut, MessageCircle, PlusSquare, Search, TrendingUp } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import axios from 'axios'; // Import axios if not already done
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { setAuthUser } from '@/redux/authSlice'
+import CreatePost from './CreatePost'
 
 
 
 const LeftSidebar = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const {user} = useSelector(store => store.auth);
+
+    const [open,setOpen] = useState(false)
 
     const LogoutHandler = async () => {
         try {
             const res = await axios.get('http://localhost:8000/api/v1/user/logout', { withCredentials: true });
             if (res.data.success) {
+                dispatch(setAuthUser(null));
                 navigate('/login');
                 toast.success(res.data.message);
             } else {
@@ -29,8 +35,8 @@ const LeftSidebar = () => {
     const sidebarHandler = (item) => {
         if (item.text === 'Logout') {
             LogoutHandler();
-        } else if (item.path) {
-            navigate(item.path);
+        } else if (item.text === 'Create') {
+            setOpen(true);
         }
     }
 
@@ -53,7 +59,7 @@ const LeftSidebar = () => {
 ]
 
     return (
-        <div className='fixed top-0 left-0 z-10 px-4 border-r border-gray-200 w-[16%] h-screen'>
+        <div className='fixed top-0 left-0 z-10 px-4 border-r border-gray-200 w-[20%] h-screen'>
             <div className='flex flex-col'>
                 <h1 className='my-8 pl-3 font-bold text-xl'>LOGO</h1>
                 <div>
@@ -61,14 +67,15 @@ const LeftSidebar = () => {
                         <div
                             onClick={() => sidebarHandler(item)}
                             key={index}
-                            className='flex items-center gap-3 relative hover:bg-gray-100 cursor-pointer rounded-lg p-3 my-3'
+                            className='flex items-center gap-3 relative hover:bg-gray-100 cursor-pointer rounded-lg p-3'
                         >
                             {item.icon}
-                            <span className='text-sm font-medium'>{item.text}</span>
+                            <span className='text-lg font-medium'>{item.text}</span>
                         </div>
                     ))}
                 </div>
             </div>
+            <CreatePost open={open} setOpen={setOpen}/>
         </div>
     )
 }
