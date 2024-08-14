@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { MoreHorizontal } from 'lucide-react'
 import { Button } from './ui/button'
 
-const CommentDialog = ({ open, setOpen }) => {
+const CommentDialog = ({ open, setOpen, image }) => {
 
   const [text, setText] = useState('');
   const onChangeEventHandler = (e) => {
@@ -22,7 +22,7 @@ const CommentDialog = ({ open, setOpen }) => {
       <DialogContent onInteractOutside={() => setOpen(false)} className='max-w-5xl p-0 flex flex-col'>
         <div className='flex flex-1 p-0'>
           <div className='w-1/2 p-0'>
-            <img src='https://images.unsplash.com/photo-1522252234503-e356532cafd5?q=80&w=1450&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+            <img src={image}
               alt='post_image' className='w-full h-full object-cover rounded-l-lg' />
           </div>
           <div className='w-1/2 flex flex-col justify-between'>
