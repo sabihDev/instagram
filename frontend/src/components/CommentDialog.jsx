@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { MoreHorizontal } from 'lucide-react'
 import { Button } from './ui/button'
 
-const CommentDialog = ({ open, setOpen, image }) => {
+const CommentDialog = ({ open, setOpen, post }) => {
 
   const [text, setText] = useState('');
   const onChangeEventHandler = (e) => {
@@ -22,7 +22,7 @@ const CommentDialog = ({ open, setOpen, image }) => {
       <DialogContent onInteractOutside={() => setOpen(false)} className='max-w-5xl p-0 flex flex-col'>
         <div className='flex flex-1 p-0'>
           <div className='w-1/2 p-0'>
-            <img src={image}
+            <img src={post?.image}
               alt='post_image' className='w-full h-full object-cover rounded-l-lg' />
           </div>
           <div className='w-1/2 flex flex-col justify-between'>
@@ -30,12 +30,12 @@ const CommentDialog = ({ open, setOpen, image }) => {
               <div className='flex items-center gap-3'>
                 <Link>
                   <Avatar>
-                    <AvatarImage src="" alt="post_image" />
+                    <AvatarImage src={post.author?.profilePicture} alt="post_image" />
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                 </Link>
                 <div>
-                  <Link className='font-semibold text-xs mr-4'>username</Link>
+                  <Link className='font-semibold text-xs mr-4'>{post.author.username}</Link>
                   {/* <span className='text-gray-600 text-sm'>Bio here...</span> */}
                 </div>
               </div>

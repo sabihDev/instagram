@@ -7,6 +7,7 @@ import axios from 'axios'; // Import axios if not already done
 import { useDispatch, useSelector } from 'react-redux'
 import { setAuthUser } from '@/redux/authSlice'
 import CreatePost from './CreatePost'
+import { setPosts } from '@/redux/postSlice'
 
 
 

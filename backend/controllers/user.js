@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import User from "../models/User.js";
+import Post from "../models/Post.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import cloudinary from "../utils/cloudinary.js";
@@ -57,11 +58,6 @@ export const login = async (req, res) => {
         }
 
         // Prepare the user data for the response
-        const populatedPosts = await Promise.all(user.posts.map(async (postId) => {
-            const post = await Post.findById({postId});
-            if(post.author.equals(user._id)) return post;
-            return null;
-        }))
 
         // Generate JWT token
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
@@ -78,7 +74,7 @@ export const login = async (req, res) => {
         };
         // Set the token as an HTTP-only cookie and return the response
         return res
-            .cookie('token', token, { httpOnly: true, sameSite: 'strict', maxAge: 24 * 60 * 60 * 1000 })
+            .cookie('token', token, { httpOnly: true, sameSite: 'strict', maxAge: 10*24 * 60 * 60 * 1000 })
             .status(200)
             .json({ message: `Welcome ${user.username}`, success: true, user: userData });
 

@@ -3,7 +3,6 @@ const postSlice = createSlice({
     name:'post',
     initialState:{
         posts:[],
-        selectedPost:null,
     },
     reducers:{
         //actions
